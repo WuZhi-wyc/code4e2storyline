@@ -694,27 +694,33 @@ export default {
                     "M" +
                       x1 +
                       "," +
-                      y1 +" "+
+                      y1 +
+                      " " +
                       "L" +
                       x2 +
                       "," +
-                      y2 +" "+
+                      y2 +
+                      " " +
                       "L" +
                       x3 +
                       "," +
-                      y3 +" "+
+                      y3 +
+                      " " +
                       "L" +
                       x4 +
                       "," +
-                      y4 +" "+
+                      y4 +
+                      " " +
                       "L" +
                       x5 +
                       "," +
-                      y5 +" "+
+                      y5 +
+                      " " +
                       "L" +
                       x6 +
                       "," +
-                      y6 +" "+
+                      y6 +
+                      " " +
                       "Z"
                   );
               }
@@ -733,6 +739,54 @@ export default {
                   y5 = yt + yj_1 + yj_1_h;
                   x6 = x1;
                   y6 = y5;
+                  // 定义渐变色的标尺
+                  linearGradient
+                    .append("stop")
+                    .attr("offset", "70%")
+                    .style("stop-color", c)
+                    .style("stop-opacity", 1); //取第一种渐变色
+                  linearGradient
+                    .append("stop")
+                    .attr("offset", "100%")
+                    .style("stop-color", color1)
+                    .style("stop-opacity", 1); //白色
+                  linearGg
+                    .append("path")
+                    .attr(
+                      "d",
+                      "M" +
+                        x1 +
+                        "," +
+                        y1 +
+                        " " +
+                        "L" +
+                        x2 +
+                        "," +
+                        y2 +
+                        " " +
+                        "L" +
+                        x3 +
+                        "," +
+                        y3 +
+                        " " +
+                        "L" +
+                        x4 +
+                        "," +
+                        y4 +
+                        " " +
+                        "L" +
+                        x5 +
+                        "," +
+                        y5 +
+                        " " +
+                        "L" +
+                        x6 +
+                        "," +
+                        y6 +
+                        " " +
+                        "Z"
+                    )
+                    .style("fill", "url(#" + i + ")");
                 } else {
                   x1 = xt + xj_1;
                   y1 = yt + yj_1 + yj_1_h;
@@ -746,37 +800,56 @@ export default {
                   y5 = yt + yj + yj_h;
                   x6 = x1;
                   y6 = y5;
+                  // 定义渐变色的标尺
+                  linearGradient
+                    .append("stop")
+                    .attr("offset", "70%")
+                    .style("stop-color", c)
+                    .style("stop-opacity", 1); //取第一种渐变色
+                  linearGradient
+                    .append("stop")
+                    .attr("offset", "100%")
+                    .style("stop-color", color1)
+                    .style("stop-opacity", 1); //白色
+                  // 画形状
+                  linearGg
+                    .append("path")
+                    .attr(
+                      "d",
+                      "M" +
+                        x1 +
+                        "," +
+                        y1 +
+                        " " +
+                        "L" +
+                        x2 +
+                        "," +
+                        y2 +
+                        " " +
+                        "L" +
+                        x3 +
+                        "," +
+                        y3 +
+                        " " +
+                        "L" +
+                        x4 +
+                        "," +
+                        y4 +
+                        " " +
+                        "L" +
+                        x5 +
+                        "," +
+                        y5 +
+                        " " +
+                        "L" +
+                        x6 +
+                        "," +
+                        y6 +
+                        " " +
+                        "Z"
+                    )
+                    .style("fill", "url(#" + i + ")");
                 }
-                linearGg
-                  .append("path")
-                  .attr(
-                    "d",
-                    "M" +
-                      x1 +
-                      "," +
-                      y1 +" "+
-                      "L" +
-                      x2 +
-                      "," +
-                      y2 +" "+
-                      "L" +
-                      x3 +
-                      "," +
-                      y3 +" "+
-                      "L" +
-                      x4 +
-                      "," +
-                      y4 +" "+
-                      "L" +
-                      x5 +
-                      "," +
-                      y5 +" "+
-                      "L" +
-                      x6 +
-                      "," +
-                      y6 +" "+
-                      "Z"
-                  );
               }
 
               // 从上到下 渐变矩形
@@ -1138,7 +1211,8 @@ export default {
                 .attr("y2", "100%");
 
               // 判断是否为矩形数组的起始位置
-              if (j === 0) { // 是矩形数组的起始位置
+              if (j === 0) {
+                // 是矩形数组的起始位置
                 // 获取当前矩形的横坐标
                 xj_1 = parseInt(
                   document.defaultView.getComputedStyle(nodelist[i][j + 1]).x
@@ -1147,19 +1221,18 @@ export default {
                 yj_1 = parseInt(
                   document.defaultView.getComputedStyle(nodelist[i][j + 1]).y
                 );
-                //获取类别是否为施者
+                // 获取类别是否为施者
                 category = parseInt(
                   nodelist[i][j]
                     .getAttribute("id")
                     .charAt(nodelist[i][j].getAttribute("id").length - 1)
-                ); 
+                );
+                // 选取当前矩形的颜色
                 color2 = document.defaultView.getComputedStyle(
                   nodelist[i][j]
                 ).fill;
                 // console.log(category)
                 // console.log(nodelist[i][j].getAttribute("id").charAt(nodelist[i][j].getAttribute("id").length - 1))
-
-                // 
                 if (category >= 1) {
                   //当前为施者
                   if (yj_1 - yj > 0) {
@@ -1173,19 +1246,23 @@ export default {
                     // drawBSB2T(category, xj_1, yj_1, color2) //由下至上画基础图形
                   }
                 }
-              } else { // 不是矩形数组的起始位置
+              } else {
+                // 不是矩形数组的起始位置
+                // 获取当前矩形的横坐标
                 xj_1 = parseInt(
                   document.defaultView.getComputedStyle(nodelist[i][j - 1]).x
                 );
+                // 获取当前矩形的纵坐标
                 yj_1 = parseInt(
                   document.defaultView.getComputedStyle(nodelist[i][j - 1]).y
                 );
-                //获取类别是否为施者
+                // 获取类别是否为施者
                 category = parseInt(
                   nodelist[i][j]
                     .getAttribute("id")
                     .charAt(nodelist[i][j].getAttribute("id").length - 1)
-                ); 
+                );
+                // 选取当前矩形的颜色
                 color2 = document.defaultView.getComputedStyle(
                   nodelist[i][j]
                 ).fill;
